@@ -9,3 +9,4 @@ nltk==3.7
 numpy
 tensorflow
 urllib3==1.26.8
+zipp
