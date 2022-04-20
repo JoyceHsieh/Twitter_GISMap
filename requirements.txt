@@ -1,0 +1,12 @@
+flask
+joblib
+pandas
+flask_bootstrap
+sklearn
+keras==2.8.0
+Keras-Preprocessing==1.1.2
+nltk==3.7
+numpy
+tensorflow-macos==2.8.0
+tensorflow-metal==0.4.0
+urllib3==1.26.8

@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>GIS Analysis</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{{url_for('static', filename='assets/img/arcgis_icon.png')}}" rel="icon">
+  <link href="{{url_for('static', filename='assets/img/arcgis_icon.png')}}" rel="apple-touch-icon">
+
+  
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+
+  <!-- Vendor CSS Files -->
+  <link href="{{url_for('static', filename='assets/vendor/animate.css/animate.min.css')}}" rel="stylesheet"> 
+  <link href="{{url_for('static', filename='assets/vendor/aos/aos.css')}}" rel="stylesheet">
+  <link href="{{url_for('static', filename='assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+  <link href="{{url_for('static', filename='assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
+  <link href="{{url_for('static', filename='assets/vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
+  <link href="{{url_for('static', filename='assets/vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
+  <link href="{{url_for('static', filename='assets/vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{{url_for('static', filename='css/style.css')}}" rel="stylesheet">
+ 
+
+
+  <!-- D3 library -->
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/frappe-charts@1.2.4/dist/frappe-charts.min.iife.js"></script> -->
+
+
+
+  <!-- Leaflet CSS -->
+  <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+  integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+  crossorigin=""/> -->
+
+  <link href="{{url_for('static', filename='css/leaflet/leaflet.css')}}" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+
+  <!-- Leaflet JavaScript code -->
+  <!-- <script type="text/javascript" src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+  integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+  crossorigin=""></script> -->
+  <!-- <script type="text/javascript" src="https://unpkg.com/leaflet@1.7.1/dist/leaflet-src.js"></script> -->
+  <!-- <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" /> -->
+  <!-- <link rel="stylesheet" type="text/css" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" /> -->
+  <!-- <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js'></script> -->
+  <!-- <script type='text/javascript' src='http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js'></script> -->
+  <!-- <script type="text/javascript" src = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script> -->
+
+  <script type="text/javascript" src="{{url_for('static', filename='css/leaflet/leaflet.js')}}"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='css/leaflet/leaflet-src.js')}}"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='css/leaflet/leaflet-src.esm.js')}}"></script>
+
+
+  <!-- Leaflet heatmap plugin-->
+  <!-- <script type="text/javascript" src="{{url_for('static', filename='js/leaflet-heat.js')}}"></script> -->
+  
+  
+  
+  <!-- <script src="https://code.jquery.com/jquery-1.8.2.js"></script> -->
+  <script src="https://unpkg.com/h3-js"></script>
+
+  
+
+
+  <!-- Template Main JS File -->
+  <script src="{{url_for('static', filename='js/main.js')}}"></script>
+  <!-- <script src="assets/js/app.js"></script> -->
+
+
+
+
+  <!-- =======================================================
+  * Template Name: Restaurantly - v3.7.0
+  * Template URL: https://bootstrapmade.com/restaurantly-restaurant-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Top Bar ======= -->
+  <div id="topbar" class="d-flex align-items-center fixed-top">
+    <div class="container d-flex justify-content-center justify-content-md-between">
+
+      <div class="contact-info d-flex align-items-center">
+        <i class="bi bi-phone d-flex align-items-center"><span>+1 234 567 890</span></i>
+        <!-- <i class="bi bi-clock d-flex align-items-center ms-4"><span> Mon-Sat: 11AM - 23PM</span></i> -->
+      </div>
+
+      <div class="languages d-none d-md-flex align-items-center">
+        <ul>
+          <li>En</li>
+          <li><a href="#">Chinese</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-cente">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
+
+      <h1 class="logo me-auto me-lg-0"><a href="#hero">ArcGIS</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="#about">About</a></li>
+          <li><a class="nav-link scrollto" href="#api">API</a></li>
+          <li><a class="nav-link scrollto" href="#nlp">NLP</a></li>
+          <li><a class="nav-link scrollto" href="#analysis">Analysis</a></li>
+          <li><a class="nav-link scrollto" href="#dashboard">Dashboard</a></li>
+          <li><a class="nav-link scrollto" href="#geoai">GeoAI</a></li>
+          <li><a class="nav-link scrollto" href="#gallery">Gallery</a></li>
+          <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="#">Drop Down 1</a></li>
+              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
+                <ul>
+                  <li><a href="#">Deep Drop Down 1</a></li>
+                  <li><a href="#">Deep Drop Down 2</a></li>
+                  <li><a href="#">Deep Drop Down 3</a></li>
+                  <li><a href="#">Deep Drop Down 4</a></li>
+                  <li><a href="#">Deep Drop Down 5</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Drop Down 2</a></li>
+              <li><a href="#">Drop Down 3</a></li>
+              <li><a href="#">Drop Down 4</a></li>
+            </ul>
+          </li> -->
+          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+      <a href="#contact" class="book-a-table-btn scrollto d-none d-lg-flex">Contact Us</a>
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
+    <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
+      <div class="row">
+        <div class="col-lg-8">
+          <h1>Welcome to <br><span>GIS & Twitter Analysis</span></h1>
+          <h2>Explore Geo data with twitts and cnahge the social influence!</h2></h2>
+
+          <div class="btns">
+            <a href="#about" class="btn-menu animated fadeInUp scrollto">More Information</a>
+            <a href="#about" class="btn-book animated fadeInUp scrollto">Deep Insight</a>
+          </div>
+        </div>
+        <div class="col-lg-4 d-flex align-items-center justify-content-center position-relative" data-aos="zoom-in" data-aos-delay="200">
+          <a href="https://youtu.be/LHDCRjAxpI0" class="glightbox play-btn"></a>
+        </div>
+
+      </div>
+    </div>
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row">
+          <div class="col-lg-6 order-1 order-lg-2" data-aos="zoom-in" data-aos-delay="100">
+            <div class="about-img">
+              <img src="{{url_for('static', filename='assets/img/about_section/about_img.png')}}" alt="">
+            </div>
+          </div>
+          <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
+            <h3>Combine Geo Data with Tiwtters, Explore soical media influence to the US.</h3>
+            <p class="fst-italic">
+              Geographic data is information mapped around a sphere. Most often, the sphere is planet earth. Geographic data highlights the latitude and longitude relationships to a specific object or location. 
+              A familiar example of geographic data is a global positioning system.
+            </p>
+            <ul>
+              <li><i class="bi bi-check-circle"></i> Geospatial data is information that describes objects, events or other features with a location on or near the surface of the earth.</li>
+              <li><i class="bi bi-check-circle"></i> Registered users can post, like, and retweet tweets, but unregistered users can only read those that are publicly available.</li>
+              <li><i class="bi bi-check-circle"></i> During high impact events these Twitter bots tend to provide time critical and comprehensive information.  </li>
+            </ul>
+            <p>
+              After 10 years of documenting the world in 140 characters, Twitter now has more than 300m active users. This might be far fewer than Facebook's 1.5 billion, 
+              but Twitter arguably has a disproportionate influence on the world, partly because it attracts a significant number of politicians, journalists, and celebrities.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End About Section -->
+
+    <!-- ======= Why Us Section ======= -->
+    <section id="why-us" class="why-us">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Why Us</h2>
+          <p>Why GIS and Twitter matter</p>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-4">
+            <div class="box" data-aos="zoom-in" data-aos-delay="100">
+              <span>01</span>
+              <h4>GIS</h4>
+              <p>A geographic information system (GIS) is a system that creates, manages, analyzes, and maps all types of data. GIS connects data to a map, integrating location data with all types of descriptive information.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 mt-4 mt-lg-0">
+            <div class="box" data-aos="zoom-in" data-aos-delay="200">
+              <span>02</span>
+              <h4>Twitter</h4>
+              <p>Twitter is an American microblogging and social networking service on which users post and interact with messages known as "tweets".</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 mt-4 mt-lg-0">
+            <div class="box" data-aos="zoom-in" data-aos-delay="300">
+              <span>03</span>
+              <h4>Machine Learning</h4>
+              <p>Machine learning is a method of data analysis that automates analytical model building. It is a branch of artificial intelligence based on the idea that systems can learn from data, identify patterns and make decisions with minimal human intervention.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Why Us Section -->
+
+    <!-- ======= API Section ======= -->
+    <section id="api" class="api section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>API</h2>
+          <p>Check Data Source</p>
+        </div>
+
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-lg-12 d-flex justify-content-center">
+            <ul id="api-flters">
+              <li data-filter="*" class="filter-active">All</li>
+              <li data-filter=".filter-events">Events</li>
+              <li data-filter=".filter-sports">Sports</li>
+              <li data-filter=".filter-holiday">Holiday</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row api-container" data-aos="fade-up" data-aos-delay="200">
+
+          <div class="col-lg-6 api-item filter-events">
+            <img src="{{url_for('static', filename='assets/img/api_section/Jan6.png')}}" class="api-img" alt="">
+            <div class="api-content">
+              <a href="#">Jan 6, 2021</a><span>Capitol attack</span>
+            </div>
+            <div class="api-ingredients">
+              On January 6, 2021, a mob of 2,000-2,500 supporters of U.S. President Donald Trump attacked the Capitol Building in Washington, D.C
+            </div>
+          </div>
+
+          <div class="col-lg-6 api-item filter-sports">
+            <img src="{{url_for('static', filename='assets/img/api_section/Oct11.png')}}" class="api-img" alt="">
+            <div class="api-content">
+              <a href="#">Oct 11, 2020</a><span>Lakers championship 2020</span>
+            </div>
+            <div class="api-ingredients">
+              Los Angeles Lakers defeat Miami Heat 4-2 in 2020 Finals, win 17th NBA Championship. On Oct. 11, 2020
+            </div>
+          </div>
+
+          <div class="col-lg-6 api-item filter-holiday">
+            <img src="{{url_for('static', filename='assets/img/api_section/July4.jpg')}}" class="api-img" alt="">
+            <div class="api-content">
+              <a href="#">July 4, 2021</a><span>Independence Day</span>
+            </div>
+            <div class="api-ingredients">
+              Independence Day is a federal holiday in the United States commemorating the Declaration of Independence of the United States, on July 4, 1776.
+            </div>
+          </div>
+
+          <div class="col-lg-6 api-item filter-events">
+            <img src="{{url_for('static', filename='assets/img/api_section/Mar19.png')}}" class="api-img" alt="">
+            <div class="api-content">
+              <a href="#">Mar 19,2020</a><span>Stay-at-Home Order</span>
+            </div>
+            <div class="api-ingredients">
+              California becomes the first state to issue a stay-at-home order, mandating all residents to stay at home except to go to an essential job or shop for essential needs. 
+            </div>
+          </div>
+
+          <div class="col-lg-6 api-item filter-events">
+            <img src="{{url_for('static', filename='assets/img/api_section/Jan14.jpg')}}" class="api-img" alt="">
+            <div class="api-content">
+              <a href="#">Jan 14, 2021</a><span>Relief package</span>
+            </div>
+            <div class="api-ingredients">
+              President Joe Biden laid out a $1.9 trillion emergency relief plan that will serve as an early test of his ability to steer the nation out of a pandemic disaster and rapidly deteriorating economy.
+            </div>
+          </div>
+
+          <div class="col-lg-6 api-item filter-holiday">
+            <img src="{{url_for('static', filename='assets/img/api_section/Nov25.jpg')}}" class="api-img" alt="">
+            <div class="api-content">
+              <a href="#">Nov 25, 2021</a><span>Thanksgiving</span>
+            </div>
+            <div class="api-ingredients">
+              Thanksgiving is a great time to be thankful and appreciate who you have and what you have. It is a time for families to meet, socialize and enjoy each other's company, sometimes the only opportunity in a year.
+            </div>
+          </div>
+
+          <div class="col-lg-6 api-item filter-sports">
+            <img src="{{url_for('static', filename='assets/img/api_section/July23.png')}}" class="api-img" alt="">
+            <div class="api-content">
+              <a href="#">July 23, 2021</a><span>Summer Olympics 2020</span>
+            </div>
+            <div class="api-ingredients">
+              The Olympic torch is lit during the opening ceremony for the Tokyo 2020 Olympic Summer Games at Olympic Stadium on July 23, 2021.
+            </div>
+          </div>
+
+          <div class="col-lg-6 api-item filter-sports">
+            <img src="{{url_for('static', filename='assets/img/api_section/Nov2.png')}}" class="api-img" alt="">
+            <div class="api-content">
+              <a href="#">Nov 2, 2021</a><span>MLB Championship</span>
+            </div>
+            <div class="api-ingredients">
+              The Atlanta Braves won the 2021 World Series on Tuesday night, taking down the Houston Astros in Game 6. It's the first championship in 26 years for the Braves, who never faced an elimination game in the 2021 postseason.
+            </div>
+          </div>
+
+          <div class="col-lg-6 api-item filter-holiday">
+            <img src="{{url_for('static', filename='assets/img/api_section/Dec25.jpg')}}" class="api-img" alt="">
+            <div class="api-content">
+              <a href="#">Dec 25, 2021</a><span>Christmas</span>
+            </div>
+            <div class="api-ingredients">
+              Christmas is an annual festival commemorating the birth of Jesus Christ, observed primarily on December 25 as a religious and cultural celebration among billions of people around the world.
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End API Section -->
+
+    <!-- ======= NLP Section ======= -->
+    <section id="nlp" class="nlp">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>NLP</h2>
+          <p>Check Our Tokeniz/StopWord</p>
+        </div>
+
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-lg-3">
+            <ul class="nav nav-tabs flex-column">
+              <li class="nav-item">
+                <a class="nav-link active show" data-bs-toggle="tab" href="#nlp-1">NLP Example</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#nlp-2">Stopwords</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#nlp-3">TF—IDF</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#nlp-4">Tokenization</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#nlp-5">Hashing</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-9 mt-4 mt-lg-0">
+            <div class="tab-content">
+              <div class="tab-pane active show" id="nlp-1">
+                <div class="row">
+                  <div class="col-lg-8 details order-2 order-lg-1">
+                    <h3>NLP Algorithm samples</h3>
+                    
+                    <form action="{{ url_for('nlpmodel') }}" method="POST" action="/nlpmodel">
+                      <div class="row">
+                        <div class="col-md-6 form-group">
+                          <input type="text" name="location" class="form-control" id="location" placeholder="Location" required>
+                        </div>
+                      </div>
+                      <div class="form-group mt-3">
+                        <input type="text" class="form-control" name="twitter" id="twitter" placeholder="twitter text" required>
+                      </div>
+                      <br>
+                      <br>
+
+                      <div class="text-center"><button type="submit">Check NLP Results</button></div>
+                      <br>
+
+
+
+                      
+                            {%if prediction%}
+                            <p>Sadness : {{prediction['sadness']}}%,  Joy : {{prediction['joy']}}%,  Love : {{prediction['love']}}% </p>
+                            <p>Anger : {{prediction['anger']}}%,  Fear : {{prediction['fear']}}%</p>
+                            <h5>Result : {{prediction['result']}}</h5>
+                            {% endif %}
+                        
+                      
+
+                    </form>
+                  
+                  </div>
+                  <div class="col-lg-4 text-center order-1 order-lg-2">
+                    <img src="{{url_for('static', filename='assets/img/NLP_section/NLP1.png')}}" alt="" class="img-fluid">
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="nlp-2">
+                <div class="row">
+                  <div class="col-lg-8 details order-2 order-lg-1">
+                    <h3>NLP stop words</h3>
+                    <p class="fst-italic">Stopwords are the words in any language which does not add much meaning to a sentence. They can safely be ignored without sacrificing the meaning of the sentence.</p>
+                    <p>For some search engines, these are some of the most common, short function words, such as the, is, at, which, and on.</p>
+                  </div>
+                  <div class="col-lg-4 text-center order-1 order-lg-2">
+                    <img src="{{url_for('static', filename='assets/img/NLP_section/NLP2.png')}}" alt="" class="img-fluid">
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="nlp-3">
+                <div class="row">
+                  <div class="col-lg-8 details order-2 order-lg-1">
+                    <h3>TF—IDF</h3>
+                    <p class="fst-italic">TF-IDF stands for “Term Frequency — Inverse Document Frequency”. This is a technique to quantify words in a set of documents.</p>
+                    <p>IWe generally compute a score for each word to signify its importance in the document and corpus. This method is a widely used technique in Information Retrieval and Text Mining.</p>
+                  </div>
+                  <div class="col-lg-4 text-center order-1 order-lg-2">
+                    <img src="{{url_for('static', filename='assets/img/NLP_section/NLP3.png')}}" alt="" class="img-fluid">
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="nlp-4">
+                <div class="row">
+                  <div class="col-lg-8 details order-2 order-lg-1">
+                    <h3>Tokenization</h3>
+                    <p class="fst-italic">Tokenization is a common task in Natural Language Processing (NLP). </p>
+                    <p> It's a fundamental step in both traditional NLP methods like Count Vectorizer and Advanced Deep Learning-based architectures like Transformers.</p>
+                  </div>
+                  <div class="col-lg-4 text-center order-1 order-lg-2">
+                    <img src="{{url_for('static', filename='assets/img/NLP_section/NLP4.png')}}" alt="" class="img-fluid">
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane" id="nlp-5">
+                <div class="row">
+                  <div class="col-lg-8 details order-2 order-lg-1">
+                    <h3>Feature hashing</h3>
+                    <p class="fst-italic">In machine learning, feature hashing, also known as the hashing trick.</p>
+                    <p>Hashing function is a fast and space-efficient way of vectorizing features, i.e. turning arbitrary features into indices in a vector or matrix </p>
+                  </div>
+                  <div class="col-lg-4 text-center order-1 order-lg-2">
+                    <img src="{{url_for('static', filename='assets/img/NLP_section/NLP5.png')}}" alt="" class="img-fluid">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End NLP Section -->
+
+    <!-- ======= NLP Section ======= -->
+    <section id="nlp" class="nlp">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>NLP MAP Example</h2>
+          <p>Check Emontion un the city</p>
+        </div>
+
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+          
+          <div class="col-lg-9 mt-4 mt-lg-0">
+            <div class="tab-content">
+             
+              <div class="row">
+              <div class="col-md-4">
+                <div class="well">
+                  <h5>Emontion:</h5>
+                  <select id="emontion" onchange="optionChanged(this.value)" class="form-select" aria-label="Default select example">
+                    <option selected value="all">All</option>
+                    <option value="hpy">Happy</option>
+                    <option value="sad">Sad</option>
+                    <option value="nut">Nut</option>
+                  </select>
+                </div>
+              </div>
+
+                  <div class="col-md-4">
+                    <div class="well">
+
+                  <h5>Polarity:</h5>
+                  <select id="polarity" onchange="optionChanged(this.value)" class="form-select" aria-label="Default select example">
+                    <option selected value="all">All</option>
+                    <option value="neg">Negitive</option>
+                    <option value="pos">Positive</option>
+                    <option value="nut">Nut</option>
+                  </select>
+
+                </div>
+                </div>
+                </div>
+
+                <br>
+                <div class="row">
+            
+                  <div class="col-md-12">
+                    <div id="myCMap" style="width: 900px; height: 400px;"></div>
+                  </div>
+
+                  </div> 
+
+
+                </div>
+              
+
+            </div>
+          </div>
+        </div>
+
+
+
+              <script src="https://d3js.org/d3.v5.min.js"></script>
+              <!-- Marker cluster CSS -->
+              <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+              <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
+              <!-- Marker cluster JavaScript code -->
+              <script type="text/javascript" src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+              <script type="text/javascript" src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster-src.js"></script>
+              <script src="{{url_for('static', filename='js/map_Ch.js')}}"></script>
+              <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    </section><!-- End NLP Section -->
+
+
+    <!-- ======= H3 Section ======= -->
+    <section id="analysis" class="analysis section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>H3 Hexagons</h2>
+          <p>Why Use Hexagons?</p>
+        </div>
+
+        <div class="analysis-slider swiper" data-aos="fade-up" data-aos-delay="100">
+          <div class="swiper-wrapper">
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <p>
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                  The H3 geospatial indexing system is a discrete global grid system consisting of a multi-precision hexagonal tiling of the sphere with hierarchical indexes.
+                  <br>
+                  The hexagonal grid system is created on the planar faces of a sphere-circumscribed icosahedron, and the grid cells are then projected to the surface of the sphere using an inverse face-centered polyhedral gnomonic projection. 
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+                <img src="{{url_for('static', filename='assets/img/h3_section/h3.png')}}" class="testimonial-img" alt="">
+                <h3>H3 Geospatial Indexing System</h3>
+                <a href="https://h3geo.org/docs/core-library/overview/"><h4>More information</h4></a>
+              </div>
+            </div><!-- End testimonial item -->
+
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <p>
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                  Uber developed H3.
+                  <br>
+                  H3 enables us to analyze geographic information to set dynamic prices and make other decisions on a city-wide level. 
+                  <br>
+                  Uber use H3 as the grid system for analysis and optimization throughout our marketplaces.
+                  <br> 
+                  H3 was designed for this purpose, and led us to make some choices such as using hexagonal, hierarchical indexes.
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+                <img src="{{url_for('static', filename='assets/img/h3_section/h3_3.png')}}" class="testimonial-img" alt="">
+                <h3>Uber Engineering</h3>
+                <a href="https://eng.uber.com/h3/"><h4>More information</h4></a>
+              </div>
+            </div><!-- End testimonial item -->
+            
+
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+    </section>
+    <!-- End H3 Section -->
+
+    <!-- ======= H3_Kepler Section ======= -->
+    <section id="analysis" class="analysis section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Kepler.gl</h2>
+          <p><a href="https://eng.uber.com/h3/"><h4>More information</h4></a></p>
+        </div>
+
+
+              <div class="testimonial-item">
+                    <iframe src="{{url_for('static', filename='data/chicagoevents_map_v2.html')}}"  width="1000" height="400"></iframe>
+                </div>
+
+      </div>
+    </section>
+    <!-- End H3_Kepler Section -->
+
+    <!-- ======= DASHBOARD Section ======= -->
+    <section id="dashboard" class="dashboard">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Dashboard</h2>
+          <p>Check the each Dashboard in different topic</p>
+        </div>
+
+        <div class="dashboard-slider swiper" data-aos="fade-up" data-aos-delay="100">
+          <div class="swiper-wrapper">
+
+            <div class="swiper-slide">
+              <div class="row event-item">
+                <div class="col-lg-6">
+                  <img src="{{url_for('static', filename='assets/img/Dashboard_section/Dash1.jpg')}}" class="img-fluid" alt="">
+                </div>
+                <div class="col-lg-6 pt-4 pt-lg-0 content">
+                  <h3>Weather effects</h3>
+                  <!-- <div class="price">
+                    <p><span>$189</span></p>
+                  </div> -->
+                  <p class="fst-italic">
+                    A recent talk by Raffi Krikorian of Twitter explained that about 0.02 grams of greenhouse gasses are emitted for every tweet. 
+                    That is a tiny amount, but when taken all together, Twitter's 50 million tweets per day, amount to about one tonne. This is based on Kirkorian's estimates on how much computing energy it takes for Twitter's servers to pump through the tweets that are submitted by members. 
+                  </p>
+                  
+                  <p>
+                    Join an international network of scientists at a free @WMO_HIWeather webinar on Communicating about High Impact Weather: Uncertainty, trust, and beliefs.
+                  </p>
+                  
+                  <a href="#menu" class="btn-menu animated fadeInUp scrollto">Coming Soon</a>
+                
+                </div>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="row event-item">
+                <div class="col-lg-6">
+                  <img src="{{url_for('static', filename='assets/img/Dashboard_section/Dash2.jpg')}}" class="img-fluid" alt="">
+                </div>
+                <div class="col-lg-6 pt-4 pt-lg-0 content">
+                  <h3>Crime effects</h3>
+                  <!-- <div class="price">
+                    <p><span>$290</span></p>
+                  </div> -->
+                  <p class="fst-italic">
+                    Social media posts incorporate real-time information that has, elsewhere, been exploited to predict social trends. This paper considers whether such information can be useful in relation to crime and fear of crime.
+                  </p>
+                  <ul>
+                    <li><i class="bi bi-check-circled"></i> Traditional media miss-represents criminal reality.</li>
+                    <li><i class="bi bi-check-circled"></i> Is crime also miss-represented in social media.</li>
+                    <li><i class="bi bi-check-circled"></i> Other experiences using big data in crime analysis.</li>
+                  </ul>
+                  <p>
+                    From a crime science perspective, the content of the tweets, and not just the location, as has been used previously might still provide a valuable source of information when the focus is on the fear of crime at a national level. 
+                  </p>
+
+                  <a href="#menu" class="btn-menu animated fadeInUp scrollto">Coming Soon</a>
+
+                </div>
+              </div>
+            </div><!-- End testimonial item -->
+
+            <div class="swiper-slide">
+              <div class="row event-item">
+                <div class="col-lg-6">
+                  <img src="{{url_for('static', filename='assets/img/Dashboard_section/Dash3.jpg')}}" class="img-fluid" alt="">
+                </div>
+                <div class="col-lg-6 pt-4 pt-lg-0 content">
+                  <h3>Economy effects</h3>
+                  <!-- <div class="price">
+                    <p><span>$99</span></p>
+                  </div> -->
+                  <p class="fst-italic">
+                    An increase in SM penetration has a negative and significant effect on economic growth. In particular, a 1% increase in the number of SM users contributes to a decrease in GDP growth of between 0.02% to 0.06%.
+                  </p>
+                  <ul>
+                    <li><i class="bi bi-check-circled"></i> For a billionaire like Musk, the fine is a drop in the bucket.</li>
+                    <li><i class="bi bi-check-circled"></i> Futurist and tech researcher Jesse Hirsh says Trump has helped Twitter evolve from being a social media platform that struggled to keep up with its peers like Facebook and Alphabet, to being part of the zeitgeist.</li>
+                  </ul>
+                  <p>
+                    Tweets have gone from being benign musings about what you ate for breakfast, to small but powerful messages that influence stock price fluctuations, directly from the source. 
+                  </p>
+
+                  <a href="#menu" class="btn-menu animated fadeInUp scrollto">Coming Soon</a>
+
+                </div>
+              </div>
+            </div><!-- End testimonial item -->
+
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+    </section>
+    <!-- End dashboard Section -->
+
+
+
+    <!-- ======= Stroy Map Section ======= -->
+    <section id="storymap" class="analysis section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Analysis</h2>
+          <p>Our Story Map</p> 
+          <a href="https://storymaps.arcgis.com/stories/3b7695ddf69b48c486ea6e9ab0fe576a" class="btn-book animated fadeInUp scrollto" target="_blank">Full Story Map</a>
+        </div>
+
+        <!-- <div class="analysis-slider swiper" data-aos="fade-up" data-aos-delay="100"></div> -->
+          <iframe src="https://storymaps.arcgis.com/stories/3b7695ddf69b48c486ea6e9ab0fe576a" width="100%" height="800px" frameborder="0" allowfullscreen allow="geolocation"></iframe>
+
+    </section>
+    <!-- End Testimonials Section -->
+
+    <!-- ======= GeoAI - ML Section ======= -->
+    <section id="geoai" class="why-us">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>GeoAi - ML</h2>
+          <p>Machine Learning Model</p>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-4">
+            <div class="box" data-aos="zoom-in" data-aos-delay="100">
+              <span>01</span>
+              <h4>Supervised</h4>
+              <p>Supervised learning is the types of machine learning in which machines are trained using well "labelled" training data, and on basis of that data, machines predict the output. The labelled data means some input data is already tagged with the correct output.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 mt-4 mt-lg-0">
+            <div class="box" data-aos="zoom-in" data-aos-delay="200">
+              <span>02</span>
+              <h4>Unsupervised</h4>
+              <p>Unsupervised learning, also known as unsupervised machine learning, uses machine learning algorithms to analyze and cluster unlabeled datasets. These algorithms discover hidden patterns or data groupings without the need for human intervention.</p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 mt-4 mt-lg-0">
+            <div class="box" data-aos="zoom-in" data-aos-delay="300">
+              <span>03</span>
+              <h4>Deep Learning</h4>
+              <p>Deep learning is the subfield of machine learning, supporting algorithms that are inspired by the structure and function of the human brain, and named as artificial neural networks.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- End Why Us Section -->
+
+    <!-- ======= Gallery Section ======= -->
+    <section id="gallery" class="gallery">
+
+      <div class="container" data-aos="fade-up">
+        <div class="section-title">
+          <h2>Gallery</h2>
+          <p>Some photos From Our Map</p>
+        </div>
+      </div>
+
+      <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row g-0">
+
+          <div class="col-lg-3 col-md-4">
+            <div class="gallery-item">
+              <a href="{{url_for('static', filename='assets/img/gallery_section/gallery1.png')}}" class="gallery-lightbox" data-gall="gallery-item">
+                <img src="{{url_for('static', filename='assets/img/gallery_section/gallery1.png')}}" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4">
+            <div class="gallery-item">
+              <a href="{{url_for('static', filename='assets/img/gallery_section/gallery2.jpg')}}" class="gallery-lightbox" data-gall="gallery-item">
+                <img src="{{url_for('static', filename='assets/img/gallery_section/gallery2.jpg')}}" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4">
+            <div class="gallery-item">
+              <a href="{{url_for('static', filename='assets/img/gallery_section/gallery3.jpg')}}" class="gallery-lightbox" data-gall="gallery-item">
+                <img src="{{url_for('static', filename='assets/img/gallery_section/gallery3.png')}}" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4">
+            <div class="gallery-item">
+              <a href="{{url_for('static', filename='assets/img/gallery_section/gallery4.jpg')}}" class="gallery-lightbox" data-gall="gallery-item">
+                <img src="{{url_for('static', filename='assets/img/gallery_section/gallery4.png')}}" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4">
+            <div class="gallery-item">
+              <a href="{{url_for('static', filename='assets/img/gallery_section/gallery5.jpg')}}" class="gallery-lightbox" data-gall="gallery-item">
+                <img src="{{url_for('static', filename='assets/img/gallery_section/gallery5.png')}}" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4">
+            <div class="gallery-item">
+              <a href="{{url_for('static', filename='assets/img/gallery_section/gallery6.jpg')}}" class="gallery-lightbox" data-gall="gallery-item">
+                <img src="{{url_for('static', filename='assets/img/gallery_section/gallery6.png')}}" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4">
+            <div class="gallery-item">
+              <a href="{{url_for('static', filename='assets/img/gallery_section/gallery7.jpg')}}" class="gallery-lightbox" data-gall="gallery-item">
+                <img src="{{url_for('static', filename='assets/img/gallery_section/gallery7.png')}}" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4">
+            <div class="gallery-item">
+              <a href="{{url_for('static', filename='assets/img/gallery_section/gallery8.jpg')}}" class="gallery-lightbox" data-gall="gallery-item">
+                <img src="{{url_for('static', filename='assets/img/gallery_section/gallery8.png')}}" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- End Gallery Section -->
+
+    <!-- ======= Staff Section ======= -->
+    <section id="staffs" class="staffs">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Team Members</h2>
+          <p>Our Proffesional Team Members</p>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6">
+            <div class="member" data-aos="zoom-in" data-aos-delay="100">
+              <img src="{{url_for('static', filename='assets/img/staff_section/TM1.png')}}" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>Brian Hilton</h4>
+                  <span>Master Lead</span>
+                </div>
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="member" data-aos="zoom-in" data-aos-delay="200">
+              <img src="{{url_for('static', filename='assets/img/staff_section/TM3.png')}}" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>Joyce Hsieh</h4>
+                  <span>Master Flask/Javascript</span>
+                </div>
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="member" data-aos="zoom-in" data-aos-delay="300">
+              <img src="{{url_for('static', filename='assets/img/staff_section/TM2.png')}}" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>Kevin Wang</h4>
+                  <span>Master ArcGIS/3DMap</span>
+                </div>
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="member" data-aos="zoom-in" data-aos-delay="200">
+              <img src="{{url_for('static', filename='assets/img/staff_section/TM2.png')}}" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>Jason Huang</h4>
+                  <span>Master Storymap</span>
+                </div>
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- End Staffs Section -->
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Contact</h2>
+          <p>Contact Us</p>
+        </div>
+      </div>
+
+      <div data-aos="fade-up">
+        <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3303.6697259993302!2d-117.7141116!3d34.1036004!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c331b887c300f5%3A0xd4790d89cfc64f12!2sClaremont%20Graduate%20University!5e0!3m2!1sen!2sus!4v1643508813916!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+
+      <div class="container" data-aos="fade-up">
+
+        <div class="row mt-5">
+
+          <div class="col-lg-4">
+            <div class="info">
+              <div class="address">
+                <i class="bi bi-geo-alt"></i>
+                <h4>Location:</h4>
+                <p>150 E 10th St, Claremont, CA 91711</p>
+              </div>
+
+              <div class="open-hours">
+                <i class="bi bi-clock"></i>
+                <h4>Open Hours:</h4>
+                <p>
+                  Monday-Saturday:<br>
+                  11:00 AM - 17:00 PM
+                </p>
+              </div>
+
+              <div class="email">
+                <i class="bi bi-envelope"></i>
+                <h4>Email:</h4>
+                <p>info@example.com</p>
+              </div>
+
+              <div class="phone">
+                <i class="bi bi-phone"></i>
+                <h4>Call:</h4>
+                <p>+1 1234 5678 90</p>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="col-lg-8 mt-5 mt-lg-0">
+
+            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                </div>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                </div>
+              </div>
+              <div class="form-group mt-3">
+                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+              </div>
+              <div class="form-group mt-3">
+                <textarea class="form-control" name="message" rows="8" placeholder="Message" required></textarea>
+              </div>
+              <div class="my-3">
+                <div class="loading">Loading</div>
+                <div class="error-message"></div>
+                <div class="sent-message">Your message has been sent. Thank you!</div>
+              </div>
+              <div class="text-center"><button type="submit">Send Message</button></div>
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- End Contact Section -->
+
+  </main>
+  <!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6">
+            <div class="footer-info">
+              <h3>GIS TEAM</h3>
+              <p>
+                150 E 10th St,  <br>
+                Claremont, CA 91711<br><br>
+                <strong>Phone:</strong> +1 1234 5678 90<br>
+                <strong>Email:</strong> info@example.com<br>
+              </p>
+              <div class="social-links mt-3">
+                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-2 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Our Services</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-4 col-md-6 footer-newsletter">
+            <h4>Our Newsletter</h4>
+            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+            <form action="" method="post">
+              <input type="email" name="email"><input type="submit" value="Subscribe">
+            </form>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>GIS TEAM</span></strong>. 2022
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/restaurantly-restaurant-template/ -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer>
+  <!-- End Footer -->
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{{url_for('static', filename='assets/vendor/aos/aos.js')}}"></script>
+  <script src="{{url_for('static', filename='assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{url_for('static', filename='assets/vendor/glightbox/js/glightbox.min.js')}}"></script>
+  <script src="{{url_for('static', filename='assets/vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
+  <script src="{{url_for('static', filename='assets/vendor/swiper/swiper-bundle.min.js')}}"></script>
+  <script src="{{url_for('static', filename='assets/vendor/php-email-form/validate.js')}}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{{url_for('static', filename='js/main.js')}}"></script>
+
+  <!-- Bootstrap core JS-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- SimpleLightbox plugin JS-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
+  <!-- Core theme JS-->
+  <!-- <script src="js/scripts.js"></script> -->
+
+</body>
+
+</html>
