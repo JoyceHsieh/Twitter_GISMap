@@ -8,6 +8,4 @@ Keras-Preprocessing==1.1.2
 nltk==3.7
 numpy
 tensorflow
-tensorflow-macos
-tensorflow-metal
 urllib3==1.26.8
