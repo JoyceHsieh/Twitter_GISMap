@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'twittergisist373-finalproject'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_19B6CC8031D0466FBC50697CC4176550 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_BD627BE8AE4B4028971AAE0B3CB8C488 }}
